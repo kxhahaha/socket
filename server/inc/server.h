@@ -20,8 +20,6 @@ class server
         int type = SOCK_STREAM;
         int protocol = 0;
         struct sockaddr_in* addr;
-        string finit = ".ini";  //配置文件路径及文件名
-        fstream finihlder;
 
         struct sockaddr_in* getaddr(const string finit);
     public:
@@ -30,6 +28,12 @@ class server
         rnt_e init();  //初始化，返回socket句柄
         void set_fini(string fini);
         fstream& get_finihdler();
+
+        string finit = ".ini";  //配置文件路径及文件名
+        fstream finihlder;
+
+
+
         ~server();
 
 };

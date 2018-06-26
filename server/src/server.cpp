@@ -6,25 +6,15 @@
 #include <fstream>
 
 #include "rnt.h"
-#include "cJSON.h"
+#include "json.h"
 
 using namespace std;
+using namespace Json;
 
 struct sockaddr_in* server::getaddr(const string finit)
 {
 
 }
-
-void server::set_fini(string fini)
-{
-    this -> finit = finit;
-}
-
-fstream& server::get_finihdler()
-{
-    return finihlder;
-}
-
 
 server::server()
 {
@@ -45,11 +35,22 @@ rnt_e server::init()
     syslog(LOG_INFO, "server open init file.");
 
     //读取配置文件
+    if(finit.empty())
+    {
+        syslog(LOG_ERR, "init file is NOT EXIST");
+    }
 
+    finihlder.open(finit);
+    jsonRoot.clear();
+    Json::CharReaderBuilder jbuilder;
+    builder["collectComments"] = false;
+    JSONCPP_STRING err;
+
+    if(!parseFromStream(jbuilder, finihlder, &jsonRoot, &err));
 
     //配置文件转换为Json
 
-    
+
 
 
     int shdler = socket(domain, type, protocol);
