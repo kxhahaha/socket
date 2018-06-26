@@ -7,8 +7,10 @@
 #include <fstream>
 
 #include "rnt.h"
+#include "json.h"
 
 using namespace std;
+using namespace Json;
 
 #define MODULE_NAME "server"
 
@@ -20,7 +22,7 @@ class server
         int type = SOCK_STREAM;
         int protocol = 0;
         struct sockaddr_in* addr;
-
+        Json::Value getJson();
         struct sockaddr_in* getaddr(const string finit);
     public:
         server();

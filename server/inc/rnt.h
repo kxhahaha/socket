@@ -5,10 +5,8 @@ typedef enum
 {
     succeess = 0,
     rnt_fopen_e,
-    
+
     rnt_resv
 }rnt_e;
-
-
 
 #endif //__RNT_H__

@@ -41,12 +41,7 @@ rnt_e server::init()
     }
 
     finihlder.open(finit);
-    jsonRoot.clear();
-    Json::CharReaderBuilder jbuilder;
-    builder["collectComments"] = false;
-    JSONCPP_STRING err;
-
-    if(!parseFromStream(jbuilder, finihlder, &jsonRoot, &err));
+   
 
     //配置文件转换为Json
 
@@ -62,6 +57,22 @@ rnt_e server::init()
     syslog(LOG_INFO, "[%s]new server with domain = %d, type = %d, protocol = %d, ret_handler = %d",
                     MODULE_NAME, domain, type, protocol, shdler);
 
+    
+}
+
+Json::Value server::getJson()
+{
+    Json::Value jsonRoot;  //定义根节点
+    Json::Value jsonItem; //定义子对象
+
+    jsonRoot.clear();
+    jsonItem.clear();
+
+    Json::CharReaderBuilder jbuilder;
+    jbuilder["collectComments"] = false;
+    JSONCPP_STRING err;
+
+    if(!parseFromStream(jbuilder, finihlder, &jsonRoot, &err));
     
 }
 
